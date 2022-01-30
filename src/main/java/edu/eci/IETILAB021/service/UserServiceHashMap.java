@@ -1,39 +1,44 @@
 package edu.eci.IETILAB021.service;
 
-import java.util.List;
+import java.util.*;
+
+import org.springframework.stereotype.Service;
 
 import edu.eci.IETILAB021.data.User;
-
+@Service
 public class UserServiceHashMap implements UserService {
-
+    HashMap <String, User> map = new HashMap <String, User> ();
     @Override
     public User create(User user) {
-        // TODO Auto-generated method stub
-        return null;
+        map.put(user.id, user);
+        return map.get(user.id);
     }
 
     @Override
     public User findById(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        return map.get(id);
     }
 
     @Override
     public List<User> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+        List<User> li = new ArrayList<User>();
+        for (User u : map.values()) {
+            li.add(u);
+        }
+        return li;
     }
 
     @Override
     public void deleteById(String id) {
-        // TODO Auto-generated method stub
+        map.remove(id);
         
     }
 
     @Override
     public User update(User user, String userId) {
-        // TODO Auto-generated method stub
-        return null;
+        map.put(userId, user);
+        return map.get(userId);
     }
     
 }
